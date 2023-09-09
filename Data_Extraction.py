@@ -7,8 +7,13 @@ response = requests.get(url) #Connect to url
 
 if response.status_code == 200: #Connection is successful
     data = response.json() #Extract the JSON data
+    print("Connection is successful")
+else:
+    print(f"Connection failed with status code {response.status_code}")
     
 restaurants_data = []
+
+print(f"Extracting Restaurants Data...")
 
 for results in data:
     for restaurants in results['restaurants']:
@@ -34,7 +39,12 @@ df_restaurants = pd.merge(df_restaurants, country_code, on = "Country Code", how
 df_restaurants = df_restaurants.drop(columns = "Country Code")
 df_restaurants.to_csv("data/restaurants.csv", index = False)
 
+print(f"Extraction is successful. Data is stored as 'restaurants.csv'")
+print(df_restaurants.head())
+
 restaurant_events = []
+
+print(f"Extracting Restaurants Event Data...")
 
 for results in data:
     for restaurants in results['restaurants']:
@@ -69,7 +79,12 @@ df_restaurant_events["Event Start Date"] = pd.to_datetime(df_restaurant_events["
 df_restaurant_events["Event End Date"] = pd.to_datetime(df_restaurant_events["Event End Date"])
 df_restaurant_events.to_csv("data/restaurant_events.csv", index = False)
 
+print(f"Extraction is successful. Data is stored as 'restaurants_event.csv'")
+print(df_restaurant_events.head())
+
 rating_data = []
+
+print(f"Extracting Restaurants Ratings Data...")
 
 for results in data:
     for restaurants in results['restaurants']:
@@ -90,3 +105,8 @@ rating_data = pd.DataFrame(rating_data)
 #Calculate the threshold of each rating group
 rating_threshold = rating_data.groupby(["Rating"]).min().reset_index()
 rating_threshold.to_csv("data/rating_threshold.csv", index = False)
+
+print(f"Extraction is successful. Data is stored as 'rating_threshold.csv'")
+print(rating_threshold.head())
+
+print("Data Extraction is completed.")
