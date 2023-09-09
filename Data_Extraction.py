@@ -71,12 +71,14 @@ for results in data:
         rating_info = restaurants['restaurant']['user_rating']
                 
         # Filter only selected Rating Text
-        extracted_info = {
-            'Threshold ': float(rating_info['aggregate_rating']),
-            'Rating': rating_info['rating_text']
-        }
+        rating_text = rating_info['rating_text']
+        if rating_text in ["Poor", "Average", "Good", "Very Good", "Excellent"]:
+            extracted_info = {
+                'Threshold ': float(rating_info['aggregate_rating']),
+                'Rating': rating_text
+            }
         
-        rating_data.append(extracted_info)
+            rating_data.append(extracted_info)
         
 rating_data = pd.DataFrame(rating_data)
 
