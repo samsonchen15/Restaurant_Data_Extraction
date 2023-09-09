@@ -27,6 +27,11 @@ for results in data:
         restaurants_data.append(extracted_info)
         
 df_restaurants = pd.DataFrame(restaurants_data)
+
+## Replace Country Code with Country Name
+country_code = pd.read_excel("Data/Country-Code.xlsx")
+df_restaurants = pd.merge(df_restaurants, country_code, on = "Country Code", how = "left")
+df_restaurants = df_restaurants.drop(columns = "Country Code")
 df_restaurants.to_csv("data/restaurants.csv", index = False)
 
 restaurant_events = []
