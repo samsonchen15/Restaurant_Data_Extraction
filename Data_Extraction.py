@@ -50,12 +50,13 @@ for results in data:
     for restaurants in results['restaurants']:
         restaurant_info = restaurants['restaurant']
         zomato_events = restaurant_info.get('zomato_events', []) #ignore restaurant w.o events
-        event_start_date = event['start_date'].split('-') #Extract Year and Month
-        event_year = int(event_start_date[0])
-        event_month = int(event_start_date[1]) 
         
         for event in zomato_events:
-                event = event['event']                
+                event = event['event']
+                event_start_date = event['start_date'].split('-') #Extract Year and Month
+                event_year = int(event_start_date[0])
+                event_month = int(event_start_date[1])                
+                
                 if event['photos']: #Fill in N/A for those events without photos
                     photo_url = event['photos'][0]['photo']['url'] 
                 else:
