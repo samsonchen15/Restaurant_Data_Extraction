@@ -34,7 +34,10 @@ restaurant_events = []
 for results in data:
     for restaurants in results['restaurants']:
         restaurant_info = restaurants['restaurant']
-        zomato_events = restaurant_info.get('zomato_events', []) #ignore restaurant w.o events 
+        zomato_events = restaurant_info.get('zomato_events', []) #ignore restaurant w.o events
+        event_start_date = event['start_date'].split('-') #Extract Year and Month
+        event_year = int(event_start_date[0])
+        event_month = int(event_start_date[1]) 
         
         for event in zomato_events:
                 event = event['event']                
@@ -43,18 +46,22 @@ for results in data:
                 else:
                     photo_url = 'N/A'
                 
-                extracted_event_info = {
-                    'Event ID': event['event_id'],
-                    'Restaurant ID': restaurant_info['R']['res_id'],
-                    'Restaurant Name': restaurant_info['name'],
-                    'Photo URL': photo_url,
-                    'Event Title': event['title'],
-                    'Event Start Date': event['start_date'],
-                    'Event End Date': event['end_date']
-                }
-                restaurant_events.append(extracted_event_info)
+                if event_year > 2019 or (event_year == 2019 and event_month >= 4): #Filter March 2019 onwards
+                    extracted_event_info = {
+                        'Event ID': event['event_id'],
+                        'Restaurant ID': restaurant_info['R']['res_id'],
+                        'Restaurant Name': restaurant_info['name'],
+                        'Photo URL': photo_url,
+                        'Event Title': event['title'],
+                        'Event Start Date': event['start_date'],
+                        'Event End Date': event['end_date']
+                    }
+                    restaurant_events.append(extracted_event_info)
                 
 df_restaurant_events = pd.DataFrame(restaurant_events)
+#Convert string to Date format
+df_restaurant_events["Event Start Date"] = pd.to_datetime(df_restaurant_events["Event Start Date"])
+df_restaurant_events["Event End Date"] = pd.to_datetime(df_restaurant_events["Event End Date"])
 df_restaurant_events.to_csv("data/restaurant_events.csv", index = False)
 
 rating_data = []
