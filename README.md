@@ -44,23 +44,23 @@ $ python Data_Extraction.py
 
 ## Deployment
 
-The Python script can be deployed on a range of cloud service platforms, including Amazon Web Services (AWS) and Google Cloud Platform (GCP). It can harness the capabilities of cloud computing to streamline and optimize the data extraction processes. Some of the key capabilities include:
+The Python script can be deployed on a range of cloud service platforms, including Amazon Web Services (AWS) and Google Cloud Platform (GCP). It can harness the capabilities of cloud computing to streamline and optimize the data extraction process. Some of the key capabilities include:
 
-**Scalability:** Ability to easily scale computing power up or down as needed. This allows the script to handle varying workloads efficiently, even at peak usage, without the constraints of physical hardwares.
+**Scalability:** Ability to easily scale computing power up or down as needed. This allows the script to handle varying workloads efficiently, even at peak usage, without the constraints of physical hardware.
 
-**Reliability and Availability:**: Enable the script to operate seamlessly without being affected by hardware failures or downtime, ensuring consistent and dependable performance. 
+**Reliability and Availability**: Enable the script to operate seamlessly without being affected by hardware failures or downtime, ensuring consistent and dependable performance. 
 
-**Automated Scheduling**: Schedule and execute code remotely and at regualr intervals, ensuring the data remains consistently up-to-date while minimizing the need for manual intervention.
+**Automated Scheduling**: Schedule and execute code remotely and at regular intervals, ensuring the data remains consistently up-to-date while minimizing the need for manual intervention.
 
 **Data Storage**: Provide various data storage solutions, e.g. SQL Database, to store the extracted data directly in these services for easy access and retrieval.
 
 ## Cloud Components
 
-**1) Cloud Data Source**: To establish a connection to an external website, that serve as an data source from which the Python script retrieves information.
+**1) Cloud Data Source**: Establish a connection to an external website, from which the Python script extracts information.
 
-**2) Cloud-Based Data Storage**: To stored data extracted by the script
+**2) Data Storage**: Provide a cloud-based solution to store data extracted by the script
 
-**3) Computing Resources**: Virtual machines to execute the Python script and handle the data extraction process.
+**3) Computing Resources**: Virtual machines to execute Python script and handle the data extraction process.
 
 **4) Scheduled Task Manager**: Schedule the script to run at regular intervals, with minimal manual intervention.
 
